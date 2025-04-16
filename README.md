@@ -14,7 +14,7 @@ In performance-critical environments like **Unity**, memory allocations can lead
 - But **1000 removals** don’t allocate ~100 KB — they can allocate **up to ~4 MB**.
 - Why? `MulticastDelegate` stores its invocation list as a **binary tree**. Rebuilding it becomes more expensive as it grows.
 
-📌 In Unity, `-=` often happens during **scene transitions**, when objects unregister themselves from global events — which leads to **unpredictable alokacje** and **longer loading times**.
+📌 In Unity, `-=` often happens during **scene transitions**, when objects unregister themselves from global events — which leads to **unpredictable allocations** and **longer loading times**.
 
 This system avoids that entirely by using a fixed-size listener array and raw `delegate` storage, bypassing `+=`/`-=` altogether.
 
